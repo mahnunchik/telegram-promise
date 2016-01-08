@@ -1,0 +1,5 @@
+# telegram-promise
+
+## License
+
+MIT
