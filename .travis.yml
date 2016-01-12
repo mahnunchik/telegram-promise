@@ -16,3 +16,4 @@ deploy:
   on:
     tags: true
     repo: mahnunchik/telegram-promise
+    node: '5'
