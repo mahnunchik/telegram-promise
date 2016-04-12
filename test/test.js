@@ -53,7 +53,8 @@ describe('Telegram Bot API', function tests() {
         api.sendMessage({
           chat_id: CHAT_ID,
           text: 'test message',
-        }).then(res => {
+        })
+        .then(res => {
           assert(res.result.text);
           assert(res.result.from);
           assert(res.result.chat);
@@ -69,7 +70,8 @@ describe('Telegram Bot API', function tests() {
         api.sendPhoto({
           chat_id: CHAT_ID,
           photo: fs.createReadStream(path.join(__dirname, 'logo.png')),
-        }).then(res => {
+        })
+        .then(res => {
           assert(res.result.photo);
           assert(res.result.from);
           assert(res.result.chat);
@@ -84,19 +86,21 @@ describe('Telegram Bot API', function tests() {
           chat_id: CHAT_ID,
           photo: fs.createReadStream(path.join(__dirname, 'logo.png')),
           caption: 'by file',
-        }).then(res1 => {
-          return api.sendPhoto({
+        })
+        .then(res1 =>
+          api.sendPhoto({
             chat_id: CHAT_ID,
             photo: res1.result.photo[0].file_id,
             caption: 'by file_id',
-          }).then(res2 => {
+          })
+          .then(res2 => {
             assert(res2.result.photo);
             assert(res2.result.from);
             assert(res2.result.chat);
             done();
             return;
-          });
-        })
+          })
+        )
         .catch(done);
       });
     });
@@ -106,7 +110,8 @@ describe('Telegram Bot API', function tests() {
         api.sendAudio({
           chat_id: CHAT_ID,
           audio: fs.createReadStream(path.join(__dirname, 'blackbird.mp3')),
-        }).then(res => {
+        })
+        .then(res => {
           assert(res.result.audio);
           assert(res.result.from);
           assert(res.result.chat);
@@ -122,7 +127,8 @@ describe('Telegram Bot API', function tests() {
         api.sendDocument({
           chat_id: CHAT_ID,
           document: fs.createReadStream(path.join(__dirname, 'document.txt')),
-        }).then(res => {
+        })
+        .then(res => {
           assert(res.result.document);
           assert(res.result.from);
           assert(res.result.chat);
@@ -138,7 +144,8 @@ describe('Telegram Bot API', function tests() {
         api.sendSticker({
           chat_id: CHAT_ID,
           sticker: fs.createReadStream(path.join(__dirname, 'sticker.webp')),
-        }).then(res => {
+        })
+        .then(res => {
           assert(res.result.sticker);
           assert(res.result.from);
           assert(res.result.chat);
@@ -154,7 +161,8 @@ describe('Telegram Bot API', function tests() {
         api.sendVideo({
           chat_id: CHAT_ID,
           video: fs.createReadStream(path.join(__dirname, 'video.mp4')),
-        }).then(res => {
+        })
+        .then(res => {
           assert(res.result.video);
           assert(res.result.from);
           assert(res.result.chat);
@@ -170,7 +178,8 @@ describe('Telegram Bot API', function tests() {
         api.sendVoice({
           chat_id: CHAT_ID,
           voice: fs.createReadStream(path.join(__dirname, 'example.ogg')),
-        }).then(res => {
+        })
+        .then(res => {
           assert(res.result.voice);
           assert(res.result.from);
           assert(res.result.chat);
@@ -187,13 +196,15 @@ describe('Telegram Bot API', function tests() {
           chat_id: CHAT_ID,
           latitude: 13.75,
           longitude: 100.466667,
-        }).then(res => {
+        })
+        .then(res => {
           assert(res.result.location);
           assert(res.result.from);
           assert(res.result.chat);
           done();
           return;
-        }).catch(done);
+        })
+        .catch(done);
       });
     });
 
@@ -202,11 +213,13 @@ describe('Telegram Bot API', function tests() {
         api.sendChatAction({
           chat_id: CHAT_ID,
           action: 'typing',
-        }).then(res => {
+        })
+        .then(res => {
           assert(res.result);
           done();
           return;
-        }).catch(done);
+        })
+        .catch(done);
       });
     });
 
@@ -214,11 +227,13 @@ describe('Telegram Bot API', function tests() {
       it('should get user photos', done => {
         api.getUserProfilePhotos({
           user_id: USER_ID,
-        }).then(res => {
+        })
+        .then(res => {
           assert(res.result.photos);
           done();
           return;
-        }).catch(done);
+        })
+        .catch(done);
       });
     });
 
@@ -227,16 +242,18 @@ describe('Telegram Bot API', function tests() {
         api.sendPhoto({
           chat_id: CHAT_ID,
           photo: fs.createReadStream(path.join(__dirname, 'logo.png')),
-        }).then(res1 => {
-          return api.getFile({
+        })
+        .then(res1 =>
+          api.getFile({
             file_id: res1.result.photo[0].file_id,
-          }).then(res2 => {
+          })
+          .then(res2 => {
             assert(res2.result.file_path);
             assert(res2.result.file_url);
             done();
             return;
-          });
-        })
+          })
+        )
         .catch(done);
       });
     });
@@ -244,22 +261,24 @@ describe('Telegram Bot API', function tests() {
     describe('#getUpdates', () => {
       it('should get updates', done => {
         api.getUpdates()
-        .then(res => {
-          assert(res.result);
-          done();
-          return;
-        }).catch(done);
+          .then(res => {
+            assert(res.result);
+            done();
+            return;
+          })
+          .catch(done);
       });
     });
 
     describe('#setWebhook', () => {
       it('should set or unset webhook', done => {
         api.setWebhook()
-        .then(res => {
-          assert(res.result);
-          done();
-          return;
-        }).catch(done);
+          .then(res => {
+            assert(res.result);
+            done();
+            return;
+          })
+          .catch(done);
       });
     });
 

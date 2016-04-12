@@ -27,7 +27,7 @@ class TelegramBotAPI {
 
   _required(parameters, required) {
     if (!parameters) {
-      throw new Error(`'parameters' object is required.`);
+      throw new Error('\'parameters\' object is required.');
     }
     required.forEach(prop => {
       if (!parameters[prop]) {
@@ -91,9 +91,8 @@ class TelegramBotAPI {
       this._required(parameters, ['chat_id', 'text']);
 
       resolve(Object.assign({}, options, { body: parameters }));
-    }).then(opts => {
-      return this.request('sendMessage', opts);
-    });
+    })
+    .then(opts => this.request('sendMessage', opts));
   }
 
   forwardMessage(parameters, options) {
@@ -101,9 +100,8 @@ class TelegramBotAPI {
       this._required(parameters, ['chat_id', 'from_chat_id', 'message_id']);
 
       resolve(Object.assign({}, options, { body: parameters }));
-    }).then(opts => {
-      return this.request('forwardMessage', opts);
-    });
+    })
+    .then(opts => this.request('forwardMessage', opts));
   }
 
   sendPhoto(parameters, options) {
@@ -115,9 +113,8 @@ class TelegramBotAPI {
       }, options, { body: parameters });
 
       resolve(opts);
-    }).then(opts => {
-      return this.request('sendPhoto', opts);
-    });
+    })
+    .then(opts => this.request('sendPhoto', opts));
   }
 
   sendAudio(parameters, options) {
@@ -129,9 +126,8 @@ class TelegramBotAPI {
       }, options, { body: parameters });
 
       resolve(opts);
-    }).then(opts => {
-      return this.request('sendAudio', opts);
-    });
+    })
+    .then(opts => this.request('sendAudio', opts));
   }
 
   sendDocument(parameters, options) {
@@ -143,9 +139,8 @@ class TelegramBotAPI {
       }, options, { body: parameters });
 
       resolve(opts);
-    }).then(opts => {
-      return this.request('sendDocument', opts);
-    });
+    })
+    .then(opts => this.request('sendDocument', opts));
   }
 
   sendSticker(parameters, options) {
@@ -157,9 +152,8 @@ class TelegramBotAPI {
       }, options, { body: parameters });
 
       resolve(opts);
-    }).then(opts => {
-      return this.request('sendSticker', opts);
-    });
+    })
+    .then(opts => this.request('sendSticker', opts));
   }
 
   sendVideo(parameters, options) {
@@ -171,9 +165,8 @@ class TelegramBotAPI {
       }, options, { body: parameters });
 
       resolve(opts);
-    }).then(opts => {
-      return this.request('sendVideo', opts);
-    });
+    })
+    .then(opts => this.request('sendVideo', opts));
   }
 
   sendVoice(parameters, options) {
@@ -185,9 +178,8 @@ class TelegramBotAPI {
       }, options, { body: parameters });
 
       resolve(opts);
-    }).then(opts => {
-      return this.request('sendVoice', opts);
-    });
+    })
+    .then(opts => this.request('sendVoice', opts));
   }
 
   sendLocation(parameters, options) {
@@ -195,9 +187,8 @@ class TelegramBotAPI {
       this._required(parameters, ['chat_id', 'latitude', 'longitude']);
 
       resolve(Object.assign({}, options, { body: parameters }));
-    }).then(opts => {
-      return this.request('sendLocation', opts);
-    });
+    })
+    .then(opts => this.request('sendLocation', opts));
   }
 
   sendChatAction(parameters, options) {
@@ -205,9 +196,8 @@ class TelegramBotAPI {
       this._required(parameters, ['chat_id', 'action']);
 
       resolve(Object.assign({}, options, { body: parameters }));
-    }).then(opts => {
-      return this.request('sendChatAction', opts);
-    });
+    })
+    .then(opts => this.request('sendChatAction', opts));
   }
 
   getUserProfilePhotos(parameters, options) {
@@ -215,9 +205,8 @@ class TelegramBotAPI {
       this._required(parameters, ['user_id']);
 
       resolve(Object.assign({}, options, { body: parameters }));
-    }).then(opts => {
-      return this.request('getUserProfilePhotos', opts);
-    });
+    })
+    .then(opts => this.request('getUserProfilePhotos', opts));
   }
 
   getFile(parameters, options) {
@@ -225,9 +214,9 @@ class TelegramBotAPI {
       this._required(parameters, ['file_id']);
 
       resolve(Object.assign({}, options, { body: parameters }));
-    }).then(opts => {
-      return this.request('getFile', opts);
-    }).then(response => {
+    })
+    .then(opts => this.request('getFile', opts))
+    .then(response => {
       const url = `${this.options.endpoint}/file/bot${this.token}/${response.result.file_path}`;
       response.result.file_url = url;
       return response;
@@ -246,9 +235,8 @@ class TelegramBotAPI {
         opts.formData = true;
       }
       resolve(opts);
-    }).then(opts => {
-      return this.request('setWebhook', opts);
-    });
+    })
+    .then(opts => this.request('setWebhook', opts));
   }
 
   /* TODO tests for inline queries */
@@ -260,9 +248,8 @@ class TelegramBotAPI {
         parameters.results = JSON.strigify(parameters.results);
       }
       resolve(Object.assign({}, options, { body: parameters }));
-    }).then(opts => {
-      return this.request('getFile', opts);
-    });
+    })
+    .then(opts => this.request('getFile', opts));
   }
 }
 
