@@ -208,6 +208,44 @@ describe('Telegram Bot API', function tests() {
       });
     });
 
+    describe('#sendVenue', () => {
+      it('should send a venue', done => {
+        api.sendVenue({
+          chat_id: CHAT_ID,
+          latitude: 13.75,
+          longitude: 100.466667,
+          title: 'test venue',
+          address: 'test venue address',
+        })
+        .then(res => {
+          assert(res.result.venue);
+          assert(res.result.from);
+          assert(res.result.chat);
+          done();
+          return;
+        })
+        .catch(done);
+      });
+    });
+
+    describe('#sendContact', () => {
+      it('should send a venue', done => {
+        api.sendContact({
+          chat_id: CHAT_ID,
+          phone_number: '+1 111 111 1111',
+          first_name: 'test name',
+        })
+        .then(res => {
+          assert(res.result.contact);
+          assert(res.result.from);
+          assert(res.result.chat);
+          done();
+          return;
+        })
+        .catch(done);
+      });
+    });
+
     describe('#sendChatAction', () => {
       it('should notify about chat action', done => {
         api.sendChatAction({
@@ -285,6 +323,33 @@ describe('Telegram Bot API', function tests() {
     describe.skip('#answerInlineQuery', () => {
       it('should answer inline query', done => {
         done();
+      });
+    });
+
+    describe('#editMessageText', () => {
+      it('should send a message', done => {
+        api.sendMessage({
+          chat_id: CHAT_ID,
+          text: 'test message 1',
+        })
+        .then(res1 => {
+          assert(res1.result.text);
+          assert(res1.result.from);
+          assert(res1.result.chat);
+          return api.editMessageText({
+            chat_id: CHAT_ID,
+            text: 'test message 2',
+            message_id: res1.result.message_id,
+          })
+          .then(res2 => {
+            assert(res2.result.text);
+            assert(res2.result.from);
+            assert(res2.result.chat);
+            done();
+            return;
+          });
+        })
+        .catch(done);
       });
     });
   });

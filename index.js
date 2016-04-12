@@ -191,6 +191,24 @@ class TelegramBotAPI {
     .then(opts => this.request('sendLocation', opts));
   }
 
+  sendVenue(parameters, options) {
+    return new Promise((resolve) => {
+      this._required(parameters, ['chat_id', 'latitude', 'longitude', 'title', 'address']);
+
+      resolve(Object.assign({}, options, { body: parameters }));
+    })
+    .then(opts => this.request('sendVenue', opts));
+  }
+
+  sendContact(parameters, options) {
+    return new Promise((resolve) => {
+      this._required(parameters, ['chat_id', 'phone_number', 'first_name']);
+
+      resolve(Object.assign({}, options, { body: parameters }));
+    })
+    .then(opts => this.request('sendContact', opts));
+  }
+
   sendChatAction(parameters, options) {
     return new Promise((resolve) => {
       this._required(parameters, ['chat_id', 'action']);
@@ -223,6 +241,24 @@ class TelegramBotAPI {
     });
   }
 
+  kickChatMember(parameters, options) {
+    return new Promise((resolve) => {
+      this._required(parameters, ['chat_id', 'user_id']);
+
+      resolve(Object.assign({}, options, { body: parameters }));
+    })
+    .then(opts => this.request('kickChatMember', opts));
+  }
+
+  unbanChatMember(parameters, options) {
+    return new Promise((resolve) => {
+      this._required(parameters, ['chat_id', 'user_id']);
+
+      resolve(Object.assign({}, options, { body: parameters }));
+    })
+    .then(opts => this.request('unbanChatMember', opts));
+  }
+
   getUpdates(parameters, options) {
     const opts = Object.assign({}, options, { body: parameters });
     return this.request('getUpdates', opts);
@@ -239,6 +275,16 @@ class TelegramBotAPI {
     .then(opts => this.request('setWebhook', opts));
   }
 
+  /* TODO tests for callback queries */
+  answerCallbackQuery(parameters, options) {
+    return new Promise((resolve) => {
+      this._required(parameters, ['callback_query_id']);
+
+      resolve(Object.assign({}, options, { body: parameters }));
+    })
+    .then(opts => this.request('answerCallbackQuery', opts));
+  }
+
   /* TODO tests for inline queries */
   answerInlineQuery(parameters, options) {
     return new Promise((resolve) => {
@@ -249,8 +295,49 @@ class TelegramBotAPI {
       }
       resolve(Object.assign({}, options, { body: parameters }));
     })
-    .then(opts => this.request('getFile', opts));
+    .then(opts => this.request('answerInlineQuery', opts));
   }
+
+  /**
+   * Updating messages
+   * https://core.telegram.org/bots/api#updating-messages
+   */
+
+  /**
+   * https://core.telegram.org/bots/api#editmessagetext
+   */
+
+  editMessageText(parameters, options) {
+    return new Promise((resolve) => {
+      this._required(parameters, ['text']);
+
+      resolve(Object.assign({}, options, { body: parameters }));
+    })
+    .then(opts => this.request('editMessageText', opts));
+  }
+
+  /**
+   * https://core.telegram.org/bots/api#editmessagecaption
+   */
+
+  editMessageCaption(parameters, options) {
+    return new Promise((resolve) => {
+      resolve(Object.assign({}, options, { body: parameters }));
+    })
+    .then(opts => this.request('editMessageCaption', opts));
+  }
+
+  /**
+   * https://core.telegram.org/bots/api#editmessagereplymarkup
+   */
+
+  editMessageReplyMarkup(parameters, options) {
+    return new Promise((resolve) => {
+      resolve(Object.assign({}, options, { body: parameters }));
+    })
+    .then(opts => this.request('editMessageReplyMarkup', opts));
+  }
+
 }
 
 module.exports = TelegramBotAPI;
