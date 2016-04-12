@@ -6,6 +6,7 @@ This is a simple implementation of [Telegram Bot API](https://core.telegram.org/
 * ES2015
 * Promise based
 * Easy customizable
+* Bot API 2.0
 
 Supports Node.js versions greater than 4.
 
@@ -15,7 +16,7 @@ Supports Node.js versions greater than 4.
 ## Installation
 
 ```bash
-$ npm install telegram-promise
+$ npm install telegram-promise --save
 ```
 
 ## Usage
@@ -36,9 +37,11 @@ api.getMe()
 api.sendPhoto({
   chat_id: CHAT_ID,
   photo: fs.createReadStream('cats.png'),
-}).then(res => {
+})
+  .then(res => {
     console.log('Done!');
-  }).catch(err => {
+  })
+  .catch(err => {
     console.log('Error:', err);
   });
 ```
@@ -47,12 +50,13 @@ api.sendPhoto({
 
 Module API follows the official Telegram Bot API: https://core.telegram.org/bots/api
 
-Implemented API verion: [January 4, 2016](https://core.telegram.org/bots/api-changelog#january-4-2016)
+Implemented API verion: [April 9, 2016](https://core.telegram.org/bots/api-changelog#april-9-2016) Bot API 2.0
 
 All methods have the last parameter `options`. It can be used for request customization. See more: [node-fetch](https://www.npmjs.com/package/node-fetch#api).
 
 ## More info
 
+* [Telegram Bot API 2.0](https://core.telegram.org/bots/2-0-intro)
 * [Telegram Bot API](https://core.telegram.org/bots/api)
 * [Telegram Bot API changelog](https://core.telegram.org/bots/api-changelog)
 * [ECMAScript® 2015 Language Specification](http://www.ecma-international.org/ecma-262/6.0/)
