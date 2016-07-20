@@ -45,11 +45,9 @@ class TelegramBotAPI {
 
     if (opts.formData && !(opts.body instanceof FormData)) {
       const formData = new FormData();
-      for (const field in opts.body) {
-        if (opts.body.hasOwnProperty(field)) {
-          formData.append(field, opts.body[field]);
-        }
-      }
+      Object.keys(opts.body).forEach(field => {
+        formData.append(field, opts.body[field]);
+      });
       delete opts.formData;
       opts.body = formData;
       Object.assign(opts.headers, formData.getHeaders());

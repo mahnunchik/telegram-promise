@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - '4'
-  - '5'
+  - '6'
 script:
   - npm run lint
   - npm test
@@ -16,4 +16,4 @@ deploy:
   on:
     tags: true
     repo: mahnunchik/telegram-promise
-    node: '5'
+    node: '6'
