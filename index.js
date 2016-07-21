@@ -289,7 +289,7 @@ class TelegramBotAPI {
       this._required(parameters, ['inline_query_id', 'results']);
 
       if (typeof parameters.results !== 'string') {
-        parameters.results = JSON.strigify(parameters.results);
+        parameters.results = JSON.stringify(parameters.results);
       }
       resolve(Object.assign({}, options, { body: parameters }));
     })
