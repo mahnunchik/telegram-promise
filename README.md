@@ -1,5 +1,7 @@
 # telegram-promise [![Build Status](https://travis-ci.org/mahnunchik/telegram-promise.svg?branch=master)](https://travis-ci.org/mahnunchik/telegram-promise)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mahnunchik/telegram-promise.svg)](https://greenkeeper.io/)
+
 This is a simple implementation of [Telegram Bot API](https://core.telegram.org/bots/api).
 
 #### Key features:
